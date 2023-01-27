@@ -1,0 +1,16 @@
+shell: 
+  id: 1
+  first_name: Henk
+  last_name: De Boer
+  status: "draft"
+  created_at: <%= 2.day.ago.to_fs(:db) %>
+  updated_at: <%= 2.day.ago.to_fs(:db) %>
+
+asml:
+  id: 2
+  first_name: Hermien
+  last_name: Jakobsen
+  status: "active"
+  created_at: <%= 2.day.ago.to_fs(:db) %>
+  updated_at: <%= 2.day.ago.to_fs(:db) %>
+

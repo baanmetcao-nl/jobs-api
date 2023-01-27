@@ -1,0 +1,29 @@
+shell:
+  id: 1
+  employer_id: 1
+  position: Software Engineer
+  experience: senior
+  description: >
+    Cras nec pretium nibh, cursus finibus elit. 
+    Vestibulum rutrum velit ut nulla ultrices consectetur eget nec dui. 
+    In gravida purus eget ligula finibus auctor. 
+    Nullam sed urna vitae dolor pulvinar placerat vel at nisl. 
+    Sed iaculis feugiat libero non lacinia. Nulla facilisi. Nam tristique gravida libero ut ullamcorper
+  created_at: <%= 2.day.ago.to_fs(:db) %>
+  updated_at: <%= 2.day.ago.to_fs(:db) %>
+  expires_at: <%= 20.days.from_now.to_fs(:db) %>
+    
+asml:
+  id: 2
+  employer_id: 2
+  position: Chip Producing Engineer
+  experience: junior
+  description: >
+    Cras nec pretium nibh, cursus finibus elit. 
+    Vestibulum rutrum velit ut nulla ultrices consectetur eget nec dui. 
+    In gravida purus eget ligula finibus auctor. 
+    Nullam sed urna vitae dolor pulvinar placerat vel at nisl. 
+    Sed iaculis feugiat libero non lacinia. Nulla facilisi. Nam tristique gravida libero ut ullamcorper
+  created_at: <%= 2.day.ago.to_fs(:db) %>
+  updated_at: <%= 2.day.ago.to_fs(:db) %>
+  expires_at: <%= 20.days.from_now.to_fs(:db) %>

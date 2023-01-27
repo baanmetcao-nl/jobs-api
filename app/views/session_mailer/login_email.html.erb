@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Inloggen bij baanmetcao.nl</title>
+  </head>
+  <body>
+    <p>Hallo <%= @user.first_name %>,</p>
+
+    <p>
+      We hebben een verzoek gekregen voor een inloglink.
+    </p>
+
+    <p>
+      Klik op deze <%= link_to "link", @url %> om in te loggen:.
+    </p>
+
+    <%= link_to "Inloggen", @url %>
+
+    <p>
+        Met vriendelijke groet,
+    </p>
+
+    <strong>baanmetcao.nl</strong>
+  </body>
+</html>

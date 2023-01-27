@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Registreren bij baanmetcao.nl</title>
+  </head>
+  <body>
+    <p>Hallo <%= @user.first_name %>,</p>
+
+    <p>
+      Bevestig je account bij baanmetcao.nl
+    </p>
+
+    <p>
+      Klik op deze <%= link_to "link", @url %> om je aanmelding af te ronden.
+    </p>
+
+    <%= link_to "Bevestigen", @url %>
+
+    <p>
+        Met vriendelijke groet,
+    </p>
+
+    <strong>baanmetcao.nl</strong>
+  </body>
+</html>

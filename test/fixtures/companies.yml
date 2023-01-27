@@ -1,0 +1,15 @@
+shell:
+  id: 1
+  name: Shell PLC 
+  location: Groningen, NL
+  website_url: shell.com
+  created_at: <%= 2.day.ago.to_fs(:db) %>
+  updated_at: <%= 2.day.ago.to_fs(:db) %>
+
+asml:
+  id: 2
+  name: ASML
+  location: Velthoven, NL
+  website_url: asml.com
+  created_at: <%= 2.day.ago.to_fs(:db) %>
+  updated_at: <%= 2.day.ago.to_fs(:db) %>
