@@ -26,8 +26,6 @@ module Jobs
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.active_record.schema_format = :sql
-
     config.action_mailer.smtp_settings = {
       address: ENV['MAIL_HOST'],
       port: ENV['MAIL_PORT'],
