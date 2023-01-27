@@ -36,7 +36,7 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test '#confirm returns not found when the user is not found' do 
+  test '#confirm returns not found when the user is not found' do
     post session_url, params: {
       email: 'mail@hoogle.nom'
     }
@@ -44,7 +44,7 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test '#confirm returns the user' do 
+  test '#confirm returns the user' do
     user = users(:shell)
     token = user.to_sgid(expires_in: 30.minutes, for: 'login_confirmation')
 
