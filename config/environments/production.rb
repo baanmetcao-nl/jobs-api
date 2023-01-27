@@ -4,7 +4,7 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
 
-  config.hosts << "web-production-3a8a.up.railway.app"
+  config.hosts << "web-production-6832.up.railway.app"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
