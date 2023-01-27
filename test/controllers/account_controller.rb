@@ -2,9 +2,9 @@
 
 require 'minitest/autorun'
 
-class RegistrationControllerTest < ActionDispatch::IntegrationTest
+class AccountControllerTest < ActionDispatch::IntegrationTest
   test '#create returns no content' do
-    post registration_url, params: {
+    post account_url, params: {
       user: {
         email: 'mail@hoogle.nom',
         first_name: 'Bert',
@@ -17,7 +17,7 @@ class RegistrationControllerTest < ActionDispatch::IntegrationTest
 
   test '#create creates a new user' do
     assert_difference 'User.count', 1 do
-      post registration_url, params: {
+      post account_url, params: {
         user: {
           email: 'mail@hoogle.nom',
           first_name: 'Bert',
@@ -28,7 +28,7 @@ class RegistrationControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#create sents a confirmation email' do
-    post registration_url, params: {
+    post account_url, params: {
       user: {
         email: 'mail@hoogle.nom',
         first_name: 'Bert',
@@ -45,7 +45,7 @@ class RegistrationControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#create returns unprocessable entity when invalid' do
-    post registration_url, params: {
+    post account_url, params: {
       user: {
         email: 'mailhoogle.nom',
         first_name: 'Bert',
@@ -57,15 +57,15 @@ class RegistrationControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#confirm returns not found when the user is not found' do
-    put registration_confirm_url('none-existing')
+    put account_confirm_url('none-existing')
 
     assert_response :not_found
   end
 
   test '#confirm returns the user when the user is found' do
     user = users(:shell)
-    token = user.to_sgid(expires_in: 7.days, for: 'registration_confirmation')
-    put registration_confirm_url(token)
+    token = user.to_sgid(expires_in: 7.days, for: 'account_confirmation')
+    put account_confirm_url(token)
 
     assert_response :ok
 

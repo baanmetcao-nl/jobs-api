@@ -7,8 +7,8 @@ Rails.application.routes.draw do
 
   post '/login', to: 'login#create'
 
-  post '/registration', to: 'registration#create'
-  put '/registration/:token', to: 'registration#confirm', as: 'registration_confirm'
+  post '/account', to: 'account#create'
+  put '/account/:token', to: 'account#confirm', as: 'account_confirm'
 
   delete '/account', to: 'account#destroy'
 

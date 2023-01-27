@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RegistrationMailerPreview < ActionMailer::Preview
+class AccountMailerPreview < ActionMailer::Preview
   def confirmation_email
     @user = User.new(
       id: 1,
@@ -9,6 +9,6 @@ class RegistrationMailerPreview < ActionMailer::Preview
       last_name: 'De Bruijn'
     )
 
-    RegistrationMailer.with(user: @user).confirmation_email
+    AccountMailer.with(user: @user).confirmation_email
   end
 end
