@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  rescue_from JWT::VerificationError do 
+    head :unauthorized
+  end
+
   def current_user
     token = authentication_token
 
@@ -10,7 +14,7 @@ class ApplicationController < ActionController::API
 
     return nil if payload.nil?
 
-    @current_user = User.find(@payload[:user_id])
+    @current_user = User.find(payload[:user_id])
     @current_user
   end
 

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_one :employer
+  has_one :employer, dependent: :destroy
 
   enum status: { draft: 0, active: 1, inactive: 2, banned: 3 }
 
-  has_many :user_email_addresses
+  has_many :user_email_addresses, dependent: :destroy
   has_many :email_addresses, through: :user_email_addresses
 
   accepts_nested_attributes_for :user_email_addresses

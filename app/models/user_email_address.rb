@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class UserEmailAddress < ApplicationRecord
-  belongs_to :user, dependent: :delete
-  belongs_to :email_address, dependent: :delete
+  belongs_to :user
+  belongs_to :email_address
 
   accepts_nested_attributes_for :email_address
 

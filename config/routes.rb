@@ -11,5 +11,9 @@ Rails.application.routes.draw do
   post '/registration', to: 'registration#create'
   put '/registration/:token', to: 'registration#confirm', as: 'registration_confirm'
 
+  namespace :employer do
+    delete '/users', to: 'users#destroy'
+  end
+
   resources :jobs
 end

@@ -8,8 +8,8 @@ class Job < ApplicationRecord
   enum experience: { unspecified: 0, junior: 1, medior: 2, senior: 3 }
   enum status: { draft: 0, active: 1 }
 
-  belongs_to :employer, dependent: :destroy
-  has_one :benefits
+  belongs_to :employer
+  has_one :benefits, dependent: :destroy
 
   validates :position, presence: true, length: { minimum: 3, maximum: 50 }
   validates :description, presence: true, length: { minimum: 100, maximum: 5_000 }

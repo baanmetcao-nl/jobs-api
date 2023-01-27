@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class SessionController < ApplicationController
-  def show; end
+  def show
+    @user = current_user
+  end
 
   def create
     user = EmailAddress.find_by(email: session_params)&.user
@@ -24,7 +26,8 @@ class SessionController < ApplicationController
     if @user.nil?
       head :not_found
     else
-      # set current user
+      payload = { user_id: @user.id }
+      response.headers['Authorization'] = "Bearer #{Jwt.encode(payload)}"
     end
   end
 

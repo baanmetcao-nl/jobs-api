@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Company < ApplicationRecord
-  has_one :employer
+  has_one :employer, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 2, maximum: 50 }
   validates :location, presence: true, length: { minimum: 5, maximum: 50 }
