@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-module Employer
-  class UserController < ApplicationController
+  class AccountController < ApplicationController
     def destroy
       user = User.find(params[:id])
       if user.nil?
@@ -13,4 +12,3 @@ module Employer
       end
     end
   end
-end
