@@ -45,7 +45,7 @@ class AccountController < ApplicationController
 
   def user_params
     params
-      .require(:user)
+      .require(:account)
       .permit(
         :first_name,
         :last_name,

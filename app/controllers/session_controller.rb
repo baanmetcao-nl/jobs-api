@@ -6,7 +6,7 @@ class SessionController < ApplicationController
   end
 
   def create
-    user = EmailAddress.find_by(email: session_params)&.user
+    user = EmailAddress.find_by(session_params)&.user
 
     if user.nil?
       head :not_found
@@ -34,6 +34,6 @@ class SessionController < ApplicationController
   private
 
   def session_params
-    params.require(:email)
+    params.require(:session).permit(:email)
   end
 end
