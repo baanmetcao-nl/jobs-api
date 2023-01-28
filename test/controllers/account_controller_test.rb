@@ -27,6 +27,18 @@ class AccountControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#create returns unprocessable entity when the email is taken' do
+    post account_url, params: {
+      user: {
+        email: 'henk@shell.com',
+        first_name: 'Henk',
+        last_name: 'De Boer'
+      }
+    }
+
+    assert_response :unprocessable_entity
+  end
+
   test '#create sents a confirmation email' do
     post account_url, params: {
       user: {

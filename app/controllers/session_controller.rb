@@ -12,7 +12,7 @@ class SessionController < ApplicationController
       head :not_found
     else
       SessionMailer
-        .with(user: user)
+        .with(user:)
         .login_email
         .deliver_later
 

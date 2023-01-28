@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  rescue_from JWT::VerificationError do 
+  rescue_from JWT::VerificationError do
     head :unauthorized
   end
 
