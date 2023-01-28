@@ -37,7 +37,7 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#confirm returns not found when the user is not found' do
-    post session_url, params: {
+    put session_confirm_url('blaat'), params: {
       email: 'mail@hoogle.nom'
     }
 
@@ -54,10 +54,10 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
 
     body = JSON.parse(@response.body)
 
-    assert_equal body['email'], 'henk@shell.com'
-    assert_equal body['first_name'], 'Henk'
-    assert_equal body['last_name'], 'De Boer'
-    assert_equal body['status'], 'draft'
-    assert_equal body['type'], 'employer'
+    assert_equal 'henk@shell.com', body['email']
+    assert_equal 'Henk', body['first_name']
+    assert_equal 'De Boer', body['last_name']
+    assert_equal 'draft', body['status']
+    assert_equal 'employer', body['type']
   end
 end

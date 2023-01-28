@@ -80,8 +80,8 @@ class CreateModels < ActiveRecord::Migration[7.0]
 
     create_table :benefits do |t|
       t.belongs_to :job, null: false
-      t.decimal :min_salary, null: false, precision: 8, scale: 2
-      t.decimal :max_salary, null: false, precision: 8, scale: 2
+      t.integer :min_salary, null: false, precision: 8, scale: 2
+      t.integer :max_salary, null: false, precision: 8, scale: 2
       t.integer :vacation_days, null: false
       t.boolean :pension, null: false
 

@@ -19,18 +19,18 @@ ActiveRecord::Schema[7.0].define(version: 20_230_122_192_605) do
 
   create_table 'benefits', force: :cascade do |t|
     t.bigint 'job_id', null: false
-    t.decimal 'min_salary', precision: 8, scale: 2, null: false
-    t.decimal 'max_salary', precision: 8, scale: 2, null: false
+    t.integer 'min_salary', null: false
+    t.integer 'max_salary', null: false
     t.integer 'vacation_days', null: false
     t.boolean 'pension', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['job_id'], name: 'index_benefits_on_job_id'
-    t.check_constraint 'max_salary <= 9999999::numeric'
-    t.check_constraint 'max_salary >= 10000::numeric'
+    t.check_constraint 'max_salary <= 9999999'
+    t.check_constraint 'max_salary >= 10000'
     t.check_constraint 'max_salary >= min_salary'
-    t.check_constraint 'min_salary <= 9999999::numeric'
-    t.check_constraint 'min_salary >= 10000::numeric'
+    t.check_constraint 'min_salary <= 9999999'
+    t.check_constraint 'min_salary >= 10000'
     t.check_constraint 'vacation_days <= 200'
     t.check_constraint 'vacation_days >= 15'
   end
