@@ -7,7 +7,9 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     user = users(:shell)
 
     post session_url, params: {
+      session:{
       email: user.email
+      }
     }
 
     assert_response :no_content
@@ -17,7 +19,9 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     user = users(:shell)
 
     post session_url, params: {
+session:{
       email: user.email
+      }
     }
 
     perform_enqueued_jobs
@@ -30,7 +34,9 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
 
   test '#create returns not found when the user is not found' do
     post session_url, params: {
+      session: {
       email: 'mail@hoogle.nom'
+      }
     }
 
     assert_response :not_found
@@ -38,7 +44,9 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
 
   test '#confirm returns not found when the user is not found' do
     put session_confirm_url('blaat'), params: {
+      session: {
       email: 'mail@hoogle.nom'
+      }
     }
 
     assert_response :not_found

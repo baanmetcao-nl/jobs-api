@@ -5,7 +5,7 @@ require 'minitest/autorun'
 class AccountControllerTest < ActionDispatch::IntegrationTest
   test '#create returns no content' do
     post account_url, params: {
-      user: {
+      account: {
         email: 'mail@hoogle.nom',
         first_name: 'Bert',
         last_name: 'De Boer'
@@ -18,7 +18,7 @@ class AccountControllerTest < ActionDispatch::IntegrationTest
   test '#create creates a new user' do
     assert_difference 'User.count', 1 do
       post account_url, params: {
-        user: {
+        account: {
           email: 'mail@hoogle.nom',
           first_name: 'Bert',
           last_name: 'De Boer'
@@ -29,7 +29,7 @@ class AccountControllerTest < ActionDispatch::IntegrationTest
 
   test '#create returns unprocessable entity when the email is taken' do
     post account_url, params: {
-      user: {
+      account: {
         email: 'henk@shell.com',
         first_name: 'Henk',
         last_name: 'De Boer'
@@ -41,7 +41,7 @@ class AccountControllerTest < ActionDispatch::IntegrationTest
 
   test '#create sents a confirmation email' do
     post account_url, params: {
-      user: {
+      account: {
         email: 'mail@hoogle.nom',
         first_name: 'Bert',
         last_name: 'De Boer'
@@ -58,7 +58,7 @@ class AccountControllerTest < ActionDispatch::IntegrationTest
 
   test '#create returns unprocessable entity when invalid' do
     post account_url, params: {
-      user: {
+      account: {
         email: 'mailhoogle.nom',
         first_name: 'Bert',
         last_name: 'De Boer'
