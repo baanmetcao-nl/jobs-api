@@ -8,7 +8,9 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.new(*job_params, employer_id: current_user.employer_id)
+    @job = Job.new(job_params.except(:benefits))
+    @job.build_benefits(benefits_params)
+    @job.employer = current_user.employer
 
     if @job.save
       render_no_content
@@ -69,6 +71,7 @@ class JobsController < ApplicationController
           .permit(:position,
                   :description,
                   :experience,
+                  :expires_at,
                   benefits: %i[min_salary max_salary vacation_days pension])
   end
 

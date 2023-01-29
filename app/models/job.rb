@@ -11,6 +11,8 @@ class Job < ApplicationRecord
   belongs_to :employer
   has_one :benefits, dependent: :destroy
 
+  accepts_nested_attributes_for :benefits
+
   validates :position, presence: true, length: { minimum: 3, maximum: 50 }
   validates :description, presence: true, length: { minimum: 100, maximum: 5_000 }
   validates :expires_at, presence: true
