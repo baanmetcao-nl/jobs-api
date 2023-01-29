@@ -7,8 +7,8 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     user = users(:shell)
 
     post session_url, params: {
-      session:{
-      email: user.email
+      session: {
+        email: user.email
       }
     }
 
@@ -19,8 +19,8 @@ class SessionControllerTest < ActionDispatch::IntegrationTest
     user = users(:shell)
 
     post session_url, params: {
-session:{
-      email: user.email
+      session: {
+        email: user.email
       }
     }
 
@@ -35,7 +35,7 @@ session:{
   test '#create returns not found when the user is not found' do
     post session_url, params: {
       session: {
-      email: 'mail@hoogle.nom'
+        email: 'mail@hoogle.nom'
       }
     }
 
@@ -45,7 +45,7 @@ session:{
   test '#confirm returns not found when the user is not found' do
     put session_confirm_url('blaat'), params: {
       session: {
-      email: 'mail@hoogle.nom'
+        email: 'mail@hoogle.nom'
       }
     }
 

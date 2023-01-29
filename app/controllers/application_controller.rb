@@ -18,6 +18,22 @@ class ApplicationController < ActionController::API
     @current_user
   end
 
+  def render_unprocessable_entity
+    render json: { error: 'Could not save the record' }, status: :unprocessable_entity
+  end
+
+  def render_not_found
+    render json: { error: 'Could not find the record' }, status: :not_found
+  end
+
+  def render_internal_server_error
+    render json: { error: 'Internal server error' }, status: :internal_server_error
+  end
+
+  def render_no_content
+    head :no_content
+  end
+
   private
 
   def authentication_token = request.headers['Authorization']&.split(' ')&.last

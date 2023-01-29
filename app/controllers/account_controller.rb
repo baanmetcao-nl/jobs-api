@@ -4,11 +4,11 @@ class AccountController < ApplicationController
   def destroy
     user = User.find(params[:id])
     if user.nil?
-      render json: { error: 'User not found' }, status: :not_found
+      render_not_found
     elsif user.destroy
-      head :no_content
+      render_ok
     else
-      head :internal_server_error
+      render_internal_server_error
     end
   end
 
@@ -24,7 +24,7 @@ class AccountController < ApplicationController
 
       head :no_content
     else
-      render json: { error: 'Could not save the user' }, status: :unprocessable_entity
+      render_unprocessable_entity
     end
   end
 
@@ -32,7 +32,7 @@ class AccountController < ApplicationController
     @user = GlobalID::Locator.locate_signed(params[:token], for: 'account_confirmation')
 
     if @user.nil?
-      render json: { error: 'User not found' }, status: :not_found
+      render_not_found
     else
       @user.activated_at = Time.zone.now
       @user.save!

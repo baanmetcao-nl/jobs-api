@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,110 +12,111 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_22_192605) do
+ActiveRecord::Schema[7.0].define(version: 20_230_122_192_605) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "citext"
-  enable_extension "plpgsql"
+  enable_extension 'citext'
+  enable_extension 'plpgsql'
 
-  create_table "benefits", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.integer "min_salary", null: false
-    t.integer "max_salary", null: false
-    t.integer "vacation_days", null: false
-    t.boolean "pension", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_benefits_on_job_id"
-    t.check_constraint "max_salary <= 9999999"
-    t.check_constraint "max_salary >= 10000"
-    t.check_constraint "max_salary >= min_salary"
-    t.check_constraint "min_salary <= 9999999"
-    t.check_constraint "min_salary >= 10000"
-    t.check_constraint "vacation_days <= 200"
-    t.check_constraint "vacation_days >= 15"
+  create_table 'benefits', force: :cascade do |t|
+    t.bigint 'job_id', null: false
+    t.integer 'min_salary', null: false
+    t.integer 'max_salary', null: false
+    t.integer 'vacation_days', null: false
+    t.boolean 'pension', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['job_id'], name: 'index_benefits_on_job_id'
+    t.check_constraint 'max_salary <= 9999999'
+    t.check_constraint 'max_salary >= 10000'
+    t.check_constraint 'max_salary >= min_salary'
+    t.check_constraint 'min_salary <= 9999999'
+    t.check_constraint 'min_salary >= 10000'
+    t.check_constraint 'vacation_days <= 200'
+    t.check_constraint 'vacation_days >= 15'
   end
 
-  create_table "companies", force: :cascade do |t|
-    t.text "name", null: false
-    t.text "location", null: false
-    t.text "website_url", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_companies_on_name"
-    t.check_constraint "char_length(location) <= 50"
-    t.check_constraint "char_length(location) >= 5"
-    t.check_constraint "char_length(name) <= 50"
-    t.check_constraint "char_length(name) >= 2"
+  create_table 'companies', force: :cascade do |t|
+    t.text 'name', null: false
+    t.text 'location', null: false
+    t.text 'website_url', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['name'], name: 'index_companies_on_name'
+    t.check_constraint 'char_length(location) <= 50'
+    t.check_constraint 'char_length(location) >= 5'
+    t.check_constraint 'char_length(name) <= 50'
+    t.check_constraint 'char_length(name) >= 2'
   end
 
-  create_table "email_addresses", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.citext "email", null: false
+  create_table 'email_addresses', force: :cascade do |t|
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.citext 'email', null: false
   end
 
-  create_table "employers", force: :cascade do |t|
-    t.bigint "company_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_employers_on_company_id"
-    t.index ["user_id"], name: "index_employers_on_user_id"
+  create_table 'employers', force: :cascade do |t|
+    t.bigint 'company_id', null: false
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_employers_on_company_id'
+    t.index ['user_id'], name: 'index_employers_on_user_id'
   end
 
-  create_table "jobs", force: :cascade do |t|
-    t.bigint "employer_id", null: false
-    t.text "position", null: false
-    t.text "description", null: false
-    t.integer "experience", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "expires_at", precision: nil, null: false
-    t.datetime "published_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["description"], name: "index_jobs_on_description"
-    t.index ["employer_id"], name: "index_jobs_on_employer_id"
-    t.index ["experience"], name: "index_jobs_on_experience"
-    t.index ["expires_at"], name: "index_jobs_on_expires_at"
-    t.index ["position"], name: "index_jobs_on_position"
-    t.index ["published_at"], name: "index_jobs_on_published_at"
-    t.index ["status"], name: "index_jobs_on_status"
-    t.check_constraint "char_length(\"position\") <= 50"
-    t.check_constraint "char_length(\"position\") >= 3"
-    t.check_constraint "char_length(description) <= 5000"
-    t.check_constraint "char_length(description) >= 100"
-    t.check_constraint "experience <= 3"
-    t.check_constraint "experience >= 0"
+  create_table 'jobs', force: :cascade do |t|
+    t.bigint 'employer_id', null: false
+    t.text 'position', null: false
+    t.text 'description', null: false
+    t.integer 'experience', default: 0, null: false
+    t.integer 'status', default: 0, null: false
+    t.datetime 'expires_at', precision: nil, null: false
+    t.datetime 'published_at', precision: nil
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['description'], name: 'index_jobs_on_description'
+    t.index ['employer_id'], name: 'index_jobs_on_employer_id'
+    t.index ['experience'], name: 'index_jobs_on_experience'
+    t.index ['expires_at'], name: 'index_jobs_on_expires_at'
+    t.index ['position'], name: 'index_jobs_on_position'
+    t.index ['published_at'], name: 'index_jobs_on_published_at'
+    t.index ['status'], name: 'index_jobs_on_status'
+    t.check_constraint 'char_length("position") <= 50'
+    t.check_constraint 'char_length("position") >= 3'
+    t.check_constraint 'char_length(description) <= 5000'
+    t.check_constraint 'char_length(description) >= 100'
+    t.check_constraint 'experience <= 3'
+    t.check_constraint 'experience >= 0'
   end
 
-  create_table "user_email_addresses", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "email_address_id", null: false
-    t.integer "use", default: 0, null: false
-    t.index ["email_address_id"], name: "index_user_email_addresses_on_email_address_id"
-    t.index ["user_id", "email_address_id"], name: "index_user_email_addresses_on_user_id_and_email_address_id", unique: true
-    t.index ["user_id", "use"], name: "index_user_email_addresses_on_user_id_and_use", unique: true
-    t.index ["user_id"], name: "index_user_email_addresses_on_user_id"
+  create_table 'user_email_addresses', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'email_address_id', null: false
+    t.integer 'use', default: 0, null: false
+    t.index ['email_address_id'], name: 'index_user_email_addresses_on_email_address_id'
+    t.index %w[user_id email_address_id], name: 'index_user_email_addresses_on_user_id_and_email_address_id',
+                                          unique: true
+    t.index %w[user_id use], name: 'index_user_email_addresses_on_user_id_and_use', unique: true
+    t.index ['user_id'], name: 'index_user_email_addresses_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.text "first_name", null: false
-    t.text "last_name", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "activated_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["status"], name: "index_users_on_status"
-    t.check_constraint "char_length(first_name) <= 50"
-    t.check_constraint "char_length(first_name) >= 2"
-    t.check_constraint "char_length(last_name) <= 50"
-    t.check_constraint "char_length(last_name) >= 2"
+  create_table 'users', force: :cascade do |t|
+    t.text 'first_name', null: false
+    t.text 'last_name', null: false
+    t.integer 'status', default: 0, null: false
+    t.datetime 'activated_at', precision: nil
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['status'], name: 'index_users_on_status'
+    t.check_constraint 'char_length(first_name) <= 50'
+    t.check_constraint 'char_length(first_name) >= 2'
+    t.check_constraint 'char_length(last_name) <= 50'
+    t.check_constraint 'char_length(last_name) >= 2'
   end
 
-  add_foreign_key "benefits", "jobs"
-  add_foreign_key "employers", "companies"
-  add_foreign_key "employers", "users"
-  add_foreign_key "jobs", "employers"
-  add_foreign_key "user_email_addresses", "email_addresses"
-  add_foreign_key "user_email_addresses", "users"
+  add_foreign_key 'benefits', 'jobs'
+  add_foreign_key 'employers', 'companies'
+  add_foreign_key 'employers', 'users'
+  add_foreign_key 'jobs', 'employers'
+  add_foreign_key 'user_email_addresses', 'email_addresses'
+  add_foreign_key 'user_email_addresses', 'users'
 end
