@@ -13,5 +13,11 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+
+    def auth_headers(user_id)
+      {
+        authorization: "Bearer #{Jwt.encode({ user_id: })}"
+      }
+    end
   end
 end

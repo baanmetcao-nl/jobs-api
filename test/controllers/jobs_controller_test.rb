@@ -36,9 +36,7 @@ class JobsControllerTest < ActionDispatch::IntegrationTest
     user = users(:shell)
 
     post jobs_url,
-         headers: {
-           authorization: "Bearer #{Jwt.encode({ user_id: user.id })}"
-         },
+         headers: auth_headers(user.id),
          params: {
            job: {
              position: 'Patattenbakker',
