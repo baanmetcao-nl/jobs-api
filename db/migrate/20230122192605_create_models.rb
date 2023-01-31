@@ -98,6 +98,14 @@ class CreateModels < ActiveRecord::Migration[7.0]
     end
 
     add_foreign_key :benefits, :jobs
+
+    create_table :newsletter_email_addresses do |t|
+      t.belongs_to :email_address, null: false, unique: true
+
+      t.timestamps
+    end
+
+    add_foreign_key :newsletter_email_addresses, :email_addresses
   end
 
   def down
