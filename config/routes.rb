@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   delete '/account', to: 'account#destroy'
 
-  resources :jobs do
-    put '/publish', to: 'jobs#publish'
-    put '/unpublish', to: 'jobs#unpublish'
-  end
+  resources :jobs
+
+  put '/jobs/:id/publish', to: 'jobs#publish', as: 'job_publish'
+  put '/jobs/:id/unpublish', to: 'jobs#unpublish', as: 'job_unpublish'
 end

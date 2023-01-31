@@ -31,8 +31,8 @@ class User < ApplicationRecord
   # TODO: test
   def activated? = activated_at.present?
 
-    def activate! 
-      active!
-      update!(activated_at: Time.zone.now)
-    end
+  def activate!
+    active!
+    update!(activated_at: Time.zone.now)
+  end
 end

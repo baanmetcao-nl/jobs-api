@@ -4,13 +4,12 @@ class JobsController < ApplicationController
   before_action :load_and_authorize_job!, except: %i[create index]
   before_action :load_and_authorize_jobs!, only: :index
 
-  def index
-  end
+  def index; end
 
   def create
     @job = Job.new(job_params.except(:benefits))
     @job.build_benefits(benefits_params)
-    @job.employer = current_user.employer
+    @job.employer = current_user&.employer
 
     authorize! @job
 
@@ -75,15 +74,15 @@ class JobsController < ApplicationController
 
   def benefits_params = job_params.fetch(:benefits)
 
-    def load_and_authorize_job!
+  def load_and_authorize_job!
     @job = Job.find(params[:id])
 
-      authorize! @job
-    end
+    authorize! @job
+  end
 
-    def load_and_authorize_jobs!
-      @jobs = Job.includes(:benefits).includes(employer: :company).all
+  def load_and_authorize_jobs!
+    @jobs = Job.includes(:benefits).includes(employer: :company).all
 
-      authorize! @jobs
-    end
+    authorize! @jobs
+  end
 end
