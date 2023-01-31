@@ -49,6 +49,15 @@ class JobsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#destroy raises unauthorized for updating a job of another employer' do
+    user = users(:asml)
+    job = jobs(:shell)
+
+    assert_raises ActionPolicy::Unauthorized do
+      delete job_url(job.id), headers: auth_headers(user.id)
+    end
+  end
+
   test '#update raises unauthorized for updating a job of another employer' do
     user = users(:asml)
     job = jobs(:shell)
@@ -56,10 +65,20 @@ class JobsControllerTest < ActionDispatch::IntegrationTest
     assert_raises ActionPolicy::Unauthorized do
       put job_url(job.id), params: {}, headers: auth_headers(user.id)
     end
+  end
+
+  test '#publish raises unauthorized for updating a job of another employer' do
+    user = users(:asml)
+    job = jobs(:shell)
 
     assert_raises ActionPolicy::Unauthorized do
       put job_publish_url(job.id), params: {}, headers: auth_headers(user.id)
     end
+  end
+
+  test '#unpublish raises unauthorized for updating a job of another employer' do
+    user = users(:asml)
+    job = jobs(:shell)
 
     assert_raises ActionPolicy::Unauthorized do
       put job_unpublish_url(job.id), params: {}, headers: auth_headers(user.id)
