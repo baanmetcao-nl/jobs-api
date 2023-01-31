@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class AccountController < ApplicationController
+  before_action :authorize_account!
+
   def destroy
-    user = User.find(params[:id])
-    if user.nil?
+    if @current_user.nil?
       render_not_found
-    elsif user.destroy
+    elsif @current_user.destroy
       render_ok
     else
       render_internal_server_error
@@ -56,4 +57,6 @@ class AccountController < ApplicationController
   def email_params
     user_params.slice('email')
   end
+
+  def authorize_account! = authorize! :account
 end

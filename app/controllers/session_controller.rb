@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionController < ApplicationController
+  skip_verify_authorized only: %i[show create confirm]
+
   def show
     @user = current_user
   end

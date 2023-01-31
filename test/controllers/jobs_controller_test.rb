@@ -34,6 +34,7 @@ class JobsControllerTest < ActionDispatch::IntegrationTest
 
   test '#create saves a new job' do
     user = users(:shell)
+    user.activate!
 
     post jobs_url,
          headers: auth_headers(user.id),

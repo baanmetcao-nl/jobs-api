@@ -18,9 +18,21 @@ class User < ApplicationRecord
 
   def email = user_email_addresses.where(use: :main).first&.email
 
+  # TODO: test
   def type
-    return 'employer' if employer.present?
+    return 'employer' if employer?
 
     'unknown'
   end
+
+  # TODO: test
+  def employer? = employer.present?
+
+  # TODO: test
+  def activated? = activated_at.present?
+
+    def activate! 
+      active!
+      update!(activated_at: Time.zone.now)
+    end
 end

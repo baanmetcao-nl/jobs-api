@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 class JobsController < ApplicationController
-  before_action :set_job, only: %i[update publish unpublish destroy]
+  before_action :load_and_authorize_job!, except: %i[create index]
+  before_action :load_and_authorize_jobs!, only: :index
 
   def index
-    @jobs = Job.includes(:benefits).includes(employer: :company).all
   end
 
   def create
     @job = Job.new(job_params.except(:benefits))
     @job.build_benefits(benefits_params)
     @job.employer = current_user.employer
+
+    authorize! @job
 
     if @job.save
       render_no_content
@@ -62,10 +64,6 @@ class JobsController < ApplicationController
 
   private
 
-  def set_job
-    @job = Job.find(params[:id])
-  end
-
   def job_params
     params.require(:job)
           .permit(:position,
@@ -76,4 +74,16 @@ class JobsController < ApplicationController
   end
 
   def benefits_params = job_params.fetch(:benefits)
+
+    def load_and_authorize_job!
+    @job = Job.find(params[:id])
+
+      authorize! @job
+    end
+
+    def load_and_authorize_jobs!
+      @jobs = Job.includes(:benefits).includes(employer: :company).all
+
+      authorize! @jobs
+    end
 end

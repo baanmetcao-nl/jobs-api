@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include ActionPolicy::Controller
+
+  verify_authorized
+
+  authorize :user, through: :current_user
+
   rescue_from JWT::VerificationError do
     head :unauthorized
   end
