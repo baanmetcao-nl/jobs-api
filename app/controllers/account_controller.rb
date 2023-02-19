@@ -14,9 +14,15 @@ class AccountController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params.except(:email))
-    @user.user_email_addresses.build(email_address_attributes: email_params)
+    email = EmailAddress.find_or_initialize_by(email_params)
 
+    if email.user_email_address.present?
+      return render_unprocessable_entity
+    end
+
+    @user = User.new(user_params.except(:email))
+    @user.user_email_addresses.build(email_address: email)
+    
     if @user.save
       AccountMailer
         .with(user: @user)
@@ -50,7 +56,8 @@ class AccountController < ApplicationController
       .permit(
         :first_name,
         :last_name,
-        :email
+        :email,
+        :employer
       )
   end
 

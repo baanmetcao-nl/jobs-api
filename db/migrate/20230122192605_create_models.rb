@@ -29,7 +29,7 @@ class CreateModels < ActiveRecord::Migration[7.0]
     end
 
     add_index :user_email_addresses, %i[user_id email_address_id], unique: true
-    add_index :user_email_addresses, %i[user_id use], unique: true
+    add_index :user_email_addresses, %i[email_address_id use], unique: true
 
     add_foreign_key :user_email_addresses, :users
     add_foreign_key :user_email_addresses, :email_addresses

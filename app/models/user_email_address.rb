@@ -10,4 +10,5 @@ class UserEmailAddress < ApplicationRecord
   delegate :email, to: :email_address
 
   validates :use, presence: true, uniqueness: { scope: :user_id }
+  validates :use, presence: true, uniqueness: { scope: :email_address_id }
 end

@@ -125,9 +125,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_151454) do
     t.bigint "user_id", null: false
     t.bigint "email_address_id", null: false
     t.integer "use", default: 0, null: false
+    t.index ["email_address_id", "use"], name: "index_user_email_addresses_on_email_address_id_and_use", unique: true
     t.index ["email_address_id"], name: "index_user_email_addresses_on_email_address_id"
     t.index ["user_id", "email_address_id"], name: "index_user_email_addresses_on_user_id_and_email_address_id", unique: true
-    t.index ["user_id", "use"], name: "index_user_email_addresses_on_user_id_and_use", unique: true
     t.index ["user_id"], name: "index_user_email_addresses_on_user_id"
   end
 
