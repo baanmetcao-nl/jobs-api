@@ -17,7 +17,7 @@ class AccountController < ApplicationController
     email = EmailAddress.find_or_initialize_by(email_params)
 
     if email.user_email_address.present?
-      return render_unprocessable_entity
+      return render json: { error: "email_taken" }, status: :unprocessable_entity
     end
 
     @user = User.new(user_params.except(:email))
@@ -31,7 +31,7 @@ class AccountController < ApplicationController
 
       head :no_content
     else
-      render_unprocessable_entity
+      return render_internal_server_error
     end
   end
 
@@ -39,7 +39,7 @@ class AccountController < ApplicationController
     @user = GlobalID::Locator.locate_signed(params[:token], for: 'account_confirmation')
 
     if @user.nil?
-      render_not_found
+      render json: { error: "user_not_found"}, status: :not_found
     else
       @user.activated_at = Time.zone.now
       @user.save!
