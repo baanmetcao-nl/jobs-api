@@ -31,6 +31,7 @@ class AccountController < ApplicationController
 
       head :no_content
     else
+      # handle validation errors better
       return render_internal_server_error
     end
   end
@@ -43,6 +44,9 @@ class AccountController < ApplicationController
     else
       @user.activated_at = Time.zone.now
       @user.save!
+
+      token = @user.to_sgid(expires_in: 60.minutes, for: 'login_confirmation')
+      response.set_header("Authorization", "Bearer #{token}")
 
       render 'account/confirm', status: :ok
     end

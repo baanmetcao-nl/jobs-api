@@ -12,6 +12,8 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
+    return @current_user if defined?(@current_user)
+
     token = authentication_token
 
     return nil if token.nil?
@@ -19,6 +21,8 @@ class ApplicationController < ActionController::API
     payload = Jwt.decode(token)
 
     return nil if payload.nil?
+
+    return nil if payload.fetch(:user_id, nil).nil?
 
     @current_user = User.find(payload[:user_id])
     @current_user
