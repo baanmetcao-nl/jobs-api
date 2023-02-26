@@ -32,7 +32,7 @@ class AccountController < ApplicationController
       head :no_content
     else
       # handle validation errors better
-      return render_internal_server_error
+      render json: { error: "user_invalid"}, status: :unprocessable_entity
     end
   end
 
