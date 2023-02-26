@@ -16,13 +16,11 @@ class AccountController < ApplicationController
   def create
     email = EmailAddress.find_or_initialize_by(email_params)
 
-    if email.user_email_address.present?
-      return render json: { error: "email_taken" }, status: :unprocessable_entity
-    end
+    return render json: { error: 'email_taken' }, status: :unprocessable_entity if email.user_email_address.present?
 
     @user = User.new(user_params.except(:email))
     @user.user_email_addresses.build(email_address: email)
-    
+
     if @user.save
       AccountMailer
         .with(user: @user)
@@ -31,8 +29,7 @@ class AccountController < ApplicationController
 
       head :no_content
     else
-      # handle validation errors better
-      return render_internal_server_error
+      render json: { error: 'user_invalid' }, status: :unprocessable_entity
     end
   end
 
@@ -40,13 +37,13 @@ class AccountController < ApplicationController
     @user = GlobalID::Locator.locate_signed(params[:token], for: 'account_confirmation')
 
     if @user.nil?
-      render json: { error: "user_not_found"}, status: :not_found
+      render json: { error: 'user_not_found' }, status: :not_found
     else
       @user.activated_at = Time.zone.now
       @user.save!
 
       token = @user.to_sgid(expires_in: 60.minutes, for: 'login_confirmation')
-      response.set_header("Authorization", "Bearer #{token}")
+      response.set_header('Authorization', "Bearer #{token}")
 
       render 'account/confirm', status: :ok
     end

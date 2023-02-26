@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_one :employer, dependent: :destroy
+  has_one :company, through: :employer
 
   enum status: { draft: 0, active: 1, inactive: 2, banned: 3 }
 

@@ -37,12 +37,15 @@ class CreateModels < ActiveRecord::Migration[7.0]
     create_table :companies do |t|
       t.text :name, null: false, index: true
       t.text :location, null: false
+      t.text :description, null: false, index: true
       t.text :website_url, null: false
 
       t.check_constraint 'char_length(name) >= 2'
       t.check_constraint 'char_length(name) <= 50'
       t.check_constraint 'char_length(location) >= 5'
       t.check_constraint 'char_length(location) <= 50'
+      t.check_constraint 'char_length(description) >= 20'
+      t.check_constraint 'char_length(description) <= 5000'
 
       t.timestamps
     end
@@ -70,7 +73,7 @@ class CreateModels < ActiveRecord::Migration[7.0]
       t.check_constraint 'experience <= 3'
       t.check_constraint 'char_length(position) >= 3'
       t.check_constraint 'char_length(position) <= 50'
-      t.check_constraint 'char_length(description) >= 100'
+      t.check_constraint 'char_length(description) >= 20'
       t.check_constraint 'char_length(description) <= 5000'
 
       t.timestamps
