@@ -16,4 +16,7 @@ Rails.application.routes.draw do
 
   put '/jobs/:id/publish', to: 'jobs#publish', as: 'job_publish'
   put '/jobs/:id/unpublish', to: 'jobs#unpublish', as: 'job_unpublish'
+
+  put '/companies', to: 'companies#update'
+  post '/companies', to: 'companies#create'
 end
