@@ -11,7 +11,10 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    current_user.company.update!(update_params)
+    company = current_user.company
+    authorize! company
+    
+    company.update!(update_params)
 
     head :no_content
   end
@@ -23,7 +26,6 @@ class CompaniesController < ApplicationController
   end
 
   def update_params
-    require(:company)
-      .permit(:name, :description, :logo, :website_url, :location)
+    params.require(:company).permit(:name, :description, :logo, :website_url, :location)
   end
 end
