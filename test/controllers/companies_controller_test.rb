@@ -12,7 +12,7 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
          headers: auth_headers(user.id),
          params: {
            company: {
-            location: 'Groningen, FR',
+             location: 'Groningen, FR',
              name: 'Hoogle.nom N.V.',
              description: 'lorem ipsum vero eos et accusamus et iusto odio dignissimos ducimus',
              website_url: 'https://www.hoogle.nom'
@@ -31,7 +31,7 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
          headers: auth_headers(user.id),
          params: {
            company: {
-            location: 'Groningen, FR',
+             location: 'Groningen, FR',
              name: 'Hoogle.nom N.V.',
              description: 'lorem ipsum vero eos et accusamus et iusto odio dignissimos ducimus',
              website_url: 'https://www.hoogle.nom'
@@ -50,7 +50,7 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
          headers: auth_headers(user.id),
          params: {
            company: {
-            location: 'Groningen, FR',
+             location: 'Groningen, FR',
              name: 'Hoogle.nom N.V.',
              description: 'lorem ipsum vero eos et accusamus et iusto odio dignissimos ducimus',
              website_url: 'https://www.hoogle.nom'
@@ -64,15 +64,15 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
     user = users(:shell)
 
     put companies_url,
-         headers: auth_headers(user.id),
-         params: {
-           company: {
+        headers: auth_headers(user.id),
+        params: {
+          company: {
             location: 'Groningen, FR',
-             name: 'Hoogle.nom N.V.',
-             description: 'lorem ipsum vero eos et accusamus et iusto odio dignissimos ducimus',
-             website_url: 'https://www.hoogle.nom'
-           }
-         }
+            name: 'Hoogle.nom N.V.',
+            description: 'lorem ipsum vero eos et accusamus et iusto odio dignissimos ducimus',
+            website_url: 'https://www.hoogle.nom'
+          }
+        }
 
     assert_response :no_content
   end
@@ -81,15 +81,15 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
     user = users(:shell)
 
     put companies_url,
-         headers: auth_headers(user.id),
-         params: {
-           company: {
+        headers: auth_headers(user.id),
+        params: {
+          company: {
             location: 'Groningen, FR',
-             name: 'Hoogle.nom N.V.',
-             description: 'lorem ipsum vero eos et accusamus et iusto odio dignissimos ducimus',
-             website_url: 'https://www.hoogle.nom'
-           }
-         }
+            name: 'Hoogle.nom N.V.',
+            description: 'lorem ipsum vero eos et accusamus et iusto odio dignissimos ducimus',
+            website_url: 'https://www.hoogle.nom'
+          }
+        }
 
     assert_equal 'Hoogle.nom N.V.', user.reload.company.name
   end

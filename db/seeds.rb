@@ -24,7 +24,8 @@ description = <<~HEREDOC
   Sed iaculis feugiat libero non lacinia. Nulla facilisi. Nam tristique gravida libero ut ullamcorper
 HEREDOC
 
-shell_company = Company.create!(name: 'Shell PLC', location: 'Groningen', website_url: 'https://www.shell.com')
+shell_company = Company.create!(name: 'Shell PLC', location: 'Groningen', website_url: 'https://www.shell.com',
+                                description:)
 shell_user = User.create!(first_name: 'Henk', last_name: 'De Boer')
 shell_employer = Employer.create!(company: shell_company, user: shell_user)
 shell_job = Job.create!(employer: shell_employer, position: 'Software Engineer', description:,
@@ -33,7 +34,8 @@ Benefits.create!(job: shell_job, min_salary: 80_000, max_salary: 100_000, vacati
 shell_email = EmailAddress.create!(email: 'henk@shell.com')
 UserEmailAddress.create!(user: shell_user, email_address: shell_email)
 
-unilever_company = Company.create!(name: 'Unilever', location: 'Haarlem', website_url: 'https://www.unilever.com')
+unilever_company = Company.create!(name: 'Unilever', location: 'Haarlem', website_url: 'https://www.unilever.com',
+                                   description:)
 unilever_user = User.create!(first_name: 'Antoinette', last_name: 'Van Duin')
 unilever_employer = Employer.create!(company: unilever_company, user: unilever_user)
 unilever_job = Job.create!(employer: unilever_employer, position: 'Marketing manager', description:,
@@ -43,7 +45,7 @@ Benefits.create!(job: unilever_job, min_salary: 120_000, max_salary: 130_000, va
 unilever_email = EmailAddress.create!(email: 'antoinette@unilever.com')
 UserEmailAddress.create!(user: unilever_user, email_address: unilever_email)
 
-asml_company = Company.create!(name: 'ASML', location: 'Eindhoven', website_url: 'https://www.asml.com')
+asml_company = Company.create!(name: 'ASML', location: 'Eindhoven', website_url: 'https://www.asml.com', description:)
 asml_user = User.create!(first_name: 'Chantal-Dirk', last_name: 'Paternotte')
 asml_employer = Employer.create!(company: asml_company, user: asml_user)
 asml_job = Job.create!(employer: asml_employer, position: 'Chip-machine operator', description:,

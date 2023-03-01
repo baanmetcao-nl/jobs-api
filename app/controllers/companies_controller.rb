@@ -13,7 +13,7 @@ class CompaniesController < ApplicationController
   def update
     company = current_user.company
     authorize! company
-    
+
     company.update!(update_params)
 
     head :no_content
