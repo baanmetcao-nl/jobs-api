@@ -23,7 +23,7 @@ class User < ApplicationRecord
   def type
     return 'employer' if employer?
 
-    'unknown'
+    'undetermined'
   end
 
   # TODO: test

@@ -1,30 +1,31 @@
 # frozen_string_literal: true
 
 class CompaniesController < ApplicationController
-  before_action :authorize_account!
-
-  def create 
-    company = Company.create!(create_params)
-    employer = Employer.create!(company_id: company.id, user_id: current_user.id)
-
-    head :no_content
-  end
-
-  def update 
-    current_user.company.update!(update_params)
+  def create
+    company = Company.new(create_params)
+    authorize! company
+    company.save!
+    Employer.create!(company_id: company.id, user_id: current_user.id)
 
     head :no_content
   end
 
-  private 
+  def update
+    company = current_user.company
+    authorize! company
 
-  def create_params 
-    require(:company)
-        .permit(:name, :description, :logo, :website_url)
+    company.update!(update_params)
+
+    head :no_content
   end
 
-  def update_params 
-    require(:company)
-        .permit(:name, :description, :logo, :website_url)
+  private
+
+  def create_params
+    params.require(:company).permit(:name, :website_url, :logo, :description, :location)
+  end
+
+  def update_params
+    params.require(:company).permit(:name, :description, :logo, :website_url, :location)
   end
 end

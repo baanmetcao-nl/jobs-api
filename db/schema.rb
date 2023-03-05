@@ -67,10 +67,14 @@ ActiveRecord::Schema[7.0].define(version: 20_230_129_151_454) do
   create_table 'companies', force: :cascade do |t|
     t.text 'name', null: false
     t.text 'location', null: false
+    t.text 'description', null: false
     t.text 'website_url', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.index ['description'], name: 'index_companies_on_description'
     t.index ['name'], name: 'index_companies_on_name'
+    t.check_constraint 'char_length(description) <= 5000'
+    t.check_constraint 'char_length(description) >= 20'
     t.check_constraint 'char_length(location) <= 50'
     t.check_constraint 'char_length(location) >= 5'
     t.check_constraint 'char_length(name) <= 50'
@@ -112,7 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_129_151_454) do
     t.check_constraint 'char_length("position") <= 50'
     t.check_constraint 'char_length("position") >= 3'
     t.check_constraint 'char_length(description) <= 5000'
-    t.check_constraint 'char_length(description) >= 100'
+    t.check_constraint 'char_length(description) >= 20'
     t.check_constraint 'experience <= 3'
     t.check_constraint 'experience >= 0'
   end
