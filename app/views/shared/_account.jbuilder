@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 return if @user.nil?
+
 employer = @user.employer
 company = employer.company
 
@@ -13,13 +14,20 @@ json.type @user.type
 
 return unless company.present?
 
-json.employer_id employer.id
+json.company do
+  json.id company.id
+  json.name company.name
+  json.location company.location
+  json.website_url company.website_url
+  json.description company.description
 
-json.company do 
-    json.id company.id
-    json.name company.name
-    json.location company.location
-    json.website_url company.website_url
-    json.description company.description
+  json.jobs company.jobs do |job|
+    json.position job.position
+    json.id job.id
+    json.description job.description
+    json.experience job.experience
+    json.status job.status
+    json.expires_at job.expires_at
+    json.published_at job.published_at
+  end
 end
-

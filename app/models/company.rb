@@ -2,6 +2,7 @@
 
 class Company < ApplicationRecord
   has_one :employer, dependent: :destroy
+  has_many :jobs, through: :employer
 
   validates :name, presence: true, length: { minimum: 2, maximum: 50 }
   validates :location, presence: true, length: { minimum: 5, maximum: 50 }

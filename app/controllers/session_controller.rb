@@ -4,7 +4,12 @@ class SessionController < ApplicationController
   skip_verify_authorized only: %i[show create confirm]
 
   def show
-    @user = current_user
+    return if current_user.nil?
+
+    @user = User
+            .includes(employer: :company)
+            .includes(company: :jobs)
+            .find(current_user.id)
   end
 
   def create
